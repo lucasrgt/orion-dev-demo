@@ -1,0 +1,28 @@
+# Root EditorConfig file
+root = true
+
+[*.{cs,csx}]
+# Non-configurable behaviors
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# Configurable behaviors
+end_of_line = lf
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+# Formatting for C#
+csharp_indent_case_contents = true # Indentar conteúdo de 'case' em switches
+csharp_indent_switch_labels = true # Indentar labels dentro de 'switch'
+csharp_prefer_braces = true # Sempre usar chaves para if/else/for
+csharp_new_line_before_open_brace = none
+csharp_new_line_before_else = false
+csharp_new_line_before_catch = false
+csharp_new_line_before_finally = false
+csharp_new_line_before_members_in_object_initializers = false
+csharp_new_line_before_members_in_anonymous_types = false
+csharp_new_line_between_query_expression_clauses = false
