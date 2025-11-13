@@ -71,7 +71,7 @@ Na Constelação Frontend, você encontra o Sistema Solar HTML:
   <tr>
     <td align="center">
       <a href="https://github.com/lucasrgt">
-        <img src="https://github.com/user-attachments/assets/23ae9048-9512-49c6-99f6-eb93f1370d07" width="100px" alt="Foto do Desenvolvedor"/><br>
+        <img src="https://avatars.githubusercontent.com/u/110699363?v=4" width="100px" alt="Foto do Desenvolvedor"/><br>
         <sub>
           <b>Lucas Richard Garcia Tinoco</b>
         </sub>
