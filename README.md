@@ -38,14 +38,13 @@ Na Constelação Frontend, você encontra o Sistema Solar HTML:
 
 📂 **Estrutura do Repositório**
 
-    orion-dev-12/
+    orion-dev-demo/
     ├─ OrionDev.AdminAPI/       → API para gerenciamento administrativo
     ├─ OrionDev.Application/    → Núcleo central da plataforma
     ├─ OrionDev.ClientAPI/      → API para acesso dos estudantes
     ├─ OrionDev.Core/           → Componentes compartilhados entre módulos
     ├─ OrionDev.Domain/         → Regras de negócio e modelos
     ├─ OrionDev.Infrastructure/ → Integração com serviços externos
-    ├─ .dockerignore            → Configurações de build Docker
     ├─ OrionDev.sln             → Solução Visual Studio
 
 ---
