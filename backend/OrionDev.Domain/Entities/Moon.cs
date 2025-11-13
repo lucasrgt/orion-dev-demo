@@ -46,4 +46,22 @@ public class Moon : IBaseEntity {
     StringValidator.Validate(name, "Name", 1, 255);
     StringValidator.Validate(lore, "Lore", 1, 500);
   }
+
+  public void UpdateName(string name) {
+    Validate(name, Lore);
+    Name = name;
+  }
+
+  public void UpdateLore(string lore) {
+    Validate(Name, lore);
+    Lore = lore;
+  }
+
+  public void UpdateAppearance(Appearance appearance) {
+    Appearance = appearance;
+  }
+
+  public void UpdateUpdatedOn(DateTime updatedOn) {
+    UpdatedOn = updatedOn;
+  }
 }

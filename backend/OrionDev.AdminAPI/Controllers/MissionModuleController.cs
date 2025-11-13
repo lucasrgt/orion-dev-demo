@@ -4,9 +4,9 @@ using OrionDev.Application.UseCases.MissionModule;
 
 namespace OrionDev.AdminAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/missionmodules")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+
 public class MissionModuleController(
   CreateMissionModule createMissionModuleUc,
   DeleteMissionModule deleteMissionModuleUc,

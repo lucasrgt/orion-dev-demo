@@ -6,14 +6,40 @@ using OrionDev.Domain.Interfaces;
 
 namespace OrionDev.AdminAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/auth")]
 [ApiController]
 public class AdminAuthController(
   IJwtService jwtService,
   IRefreshTokenService refreshTokenService,
-  Login loginUc
+  Login loginUc,
+  RegisterUser registerUc
 ) : ControllerBase {
-  // POST: api/AdminAuth/login
+  // POST: api/auth/register
+  /// <summary>
+  /// Registers a new user and issues an access token and a refresh token.
+  /// </summary>
+  /// <param name="request">Registration input containing user details.</param>
+  /// <returns>Returns the access token if registration is successful.</returns>
+  [HttpPost("register")]
+  public async Task<ActionResult<string>> Register(RegisterUserInput request) {
+    try {
+      var output = await registerUc.Execute(request);
+
+      // Tokens/Session
+      var accessToken = jwtService.CreateAccessToken(
+        output.Id,
+        output.Role
+      );
+
+      var refreshToken = await refreshTokenService.CreateRefreshToken(output.Id);
+      SetRefreshToken(refreshToken);
+      return Ok(accessToken);
+    } catch (Exception e) {
+      return BadRequest(e.Message);
+    }
+  }
+
+  // POST: api/auth/login
   /// <summary>
   /// Logs in the user and issues an access token and a refresh token.
   /// </summary>

@@ -80,4 +80,17 @@ public class Mission : IBaseEntity {
   public bool IsUnlockedBy(List<Guid> completedMissionIds) {
     return PrerequisiteMissions.All(p => completedMissionIds.Contains(p.Id));
   }
+
+  public void UpdateName(string name) {
+    StringValidator.Validate(name, nameof(Name), 1, 255);
+    Name = name;
+  }
+
+  public void UpdateDetail(MissionDetail detail) {
+    Detail = detail;
+  }
+
+  public void UpdateUpdatedOn(DateTime updatedOn) {
+    UpdatedOn = updatedOn;
+  }
 }

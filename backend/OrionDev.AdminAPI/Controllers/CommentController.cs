@@ -4,9 +4,9 @@ using OrionDev.Application.UseCases.Comment;
 
 namespace OrionDev.AdminAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/comments")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+
 public class CommentController(
   CreateCommentOnVideo createCommentOnVideoUc,
   DeleteCommentOnVideo deleteCommentOnVideoUc,

@@ -27,4 +27,13 @@ public class SolarSystem : IBaseEntity {
   private static void Validate(string name) {
     StringValidator.Validate(name, "Name", 1, 255);
   }
+
+  public void UpdateName(string name) {
+    Validate(name);
+    Name = name;
+  }
+
+  public void UpdateUpdatedOn(DateTime updatedOn) {
+    UpdatedOn = updatedOn;
+  }
 }

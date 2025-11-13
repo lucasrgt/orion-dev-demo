@@ -49,7 +49,13 @@ builder.Services.AddOpenApi("v1",
 // Cors
 builder.Services.AddCors(options => {
   options.AddPolicy("AdminDefaultCorsPolicy", policy => {
-    policy.WithOrigins("http://localhost:8080")
+    policy.WithOrigins(
+        "http://localhost",
+        "http://localhost:80",
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:8080"
+      )
       .AllowAnyHeader()
       .AllowAnyMethod()
       .AllowCredentials();
@@ -68,18 +74,19 @@ app.UseAuthorization();
 // Run
 app.MapControllers();
 
-if (app.Environment.IsDevelopment()) {
-  app.MapOpenApi();
-  app.MapScalarApiReference(options => {
-    options.Title = "OrionDev API";
-    options.Theme = ScalarTheme.BluePlanet;
-    options.ShowSidebar = true;
-    options.AddPreferredSecuritySchemes("Bearer");
-    options.AddHttpAuthentication("Bearer",
-      _ => { });
-  });
-  PrepDb.PrepPopulation(app);
-}
+// OpenAPI & Scalar (disponível em todos os ambientes)
+app.MapOpenApi();
+app.MapScalarApiReference(options => {
+  options.Title = "OrionDev API";
+  options.Theme = ScalarTheme.BluePlanet;
+  options.ShowSidebar = true;
+  options.AddPreferredSecuritySchemes("Bearer");
+  options.AddHttpAuthentication("Bearer",
+    _ => { });
+});
+
+// Database setup (migrations & seed)
+PrepDb.PrepPopulation(app);
 
 if (!app.Environment.IsDevelopment()) {
   app.UseHsts();

@@ -4,9 +4,8 @@ using OrionDev.Application.UseCases.SolarSystem;
 
 namespace OrionDev.AdminAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/solarsystems")]
 [ApiController]
-[Authorize(Roles = "Admin")]
 public class SolarSystemController(
   CreateSolarSystem createSolarSystemUc,
   DeleteSolarSystem deleteSolarSystemUc,
@@ -14,27 +13,34 @@ public class SolarSystemController(
   GetByIdSolarSystem getByIdSolarSystemUc,
   UpdateSolarSystem updateSolarSystemUc
 ) : ControllerBase {
-  [HttpPost("create-solar-system")]
-  public async Task<IActionResult> CreateSolarSystem(CreateSolarSystemInput req) {
-    var output = await createSolarSystemUc.Execute(req);
-    return Ok(output);
-  }
-
-  [HttpDelete("delete-solar-system/{id:guid}")]
-  public async Task<IActionResult> DeleteSolarSystem(Guid id) {
-    var output = await deleteSolarSystemUc.Execute(id);
-    return Ok(output);
-  }
-
-  [HttpGet("get-all-solar-systems")]
+  [HttpGet]
   public async Task<IActionResult> GetAllSolarSystem() {
     var output = await getAllSolarSystemUc.Execute();
     return Ok(output);
   }
 
-  [HttpGet("get-by-id-solar-system/{id:guid}")]
+  [HttpGet("{id:guid}")]
   public async Task<IActionResult> GetByIdSolarSystem(Guid id) {
     var output = await getByIdSolarSystemUc.Execute(id);
+    return Ok(output);
+  }
+
+  [HttpPost]
+  public async Task<IActionResult> CreateSolarSystem(CreateSolarSystemInput req) {
+    var output = await createSolarSystemUc.Execute(req);
+    return Ok(output);
+  }
+
+  [HttpPut("{id:guid}")]
+  public async Task<IActionResult> UpdateSolarSystem(Guid id, UpdateSolarSystemInput req) {
+    var input = new UpdateSolarSystemInput(id.ToString(), req.Name);
+    var output = await updateSolarSystemUc.Execute(input);
+    return Ok(output);
+  }
+
+  [HttpDelete("{id:guid}")]
+  public async Task<IActionResult> DeleteSolarSystem(Guid id) {
+    var output = await deleteSolarSystemUc.Execute(id);
     return Ok(output);
   }
 }

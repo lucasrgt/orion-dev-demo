@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode colors (default) */
+:root {
+  background-color: #ffffff;
+  color: #111827;
+}
+
+/* Dark mode colors */
+:root.dark {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+body {
+  background-color: inherit;
+  color: inherit;
+}

@@ -1,80 +1,79 @@
-# ORIONDEV
+# OrionDev
 
-**Sobre o Projeto**
+Plataforma gamificada de aprendizado de tecnologia com temática espacial.
 
-A OrionDev é uma plataforma completa de cursos de tecnologia, organizada de forma intuitiva para facilitar sua jornada de aprendizado. Pensamos na experiência do usuário como uma exploração pelo universo, onde você pode navegar entre diferentes áreas de conhecimento:
+## 🛠️ Stack
 
-• Galáxia → A plataforma completa
+**Backend:** .NET 9 + PostgreSQL + Clean Architecture  
+**Frontend:** React 19 + TypeScript + TanStack Query + Zustand + Zod + Tailwind CSS
 
-• Constelações → Categorias como Backend e Frontend
+## 🚀 Execução Rápida
 
-• Sistemas Solares → Tecnologias como HTML, Python, JavaScript
+### Modo Desenvolvimento
 
-• Planetas → Cursos principais
+```powershell
+# Iniciar
+.\start-dev.ps1
 
-• Luas → Cursos complementares
+# Parar
+.\stop-dev.ps1
+```
 
----
+Sobe PostgreSQL (Docker) + Backend + Frontend em modo desenvolvimento com hot-reload.
 
-🔭 **Exemplo prático**:
+**Acesse:**
 
-Na Constelação Frontend, você encontra o Sistema Solar HTML:
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:5100/scalar
+- **Database:** localhost:5432
 
-• Planeta: "HTML e CSS para Iniciantes"
+### Modo Produção (Docker)
 
-• Lua: "CSS com SASS"
+```powershell
+# Iniciar
+.\start-prod.ps1
 
----
+# Parar
+.\stop-prod.ps1
+```
 
-🛠️ **Tecnologias Utilizadas**
+Sobe todo o stack (PostgreSQL + Backend + Frontend) em containers Docker.
 
-• C# (.NET Core)
+**Acesse:**
 
-• Docker
+- **Frontend:** http://localhost
+- **Backend API:** http://localhost:5100/scalar
+- **Database:** localhost:5432
 
-• Clean Architecture
+**Comandos úteis:**
 
----
+```powershell
+# Ver logs
+docker compose logs -f
 
-📂 **Estrutura do Repositório**
+# Parar containers
+docker compose down
 
-    orion-dev-demo/
-    ├─ OrionDev.AdminAPI/       → API para gerenciamento administrativo
-    ├─ OrionDev.Application/    → Núcleo central da plataforma
-    ├─ OrionDev.ClientAPI/      → API para acesso dos estudantes
-    ├─ OrionDev.Core/           → Componentes compartilhados entre módulos
-    ├─ OrionDev.Domain/         → Regras de negócio e modelos
-    ├─ OrionDev.Infrastructure/ → Integração com serviços externos
-    ├─ OrionDev.sln             → Solução Visual Studio
+# Remover volumes (limpar banco)
+docker compose down -v
+```
 
----
+## 📋 Arquitetura
 
-**Como rodar**
+### Frontend (MVVM Pattern)
 
-1. Clonar o repositório
+- **Views:** Components + Pages
+- **ViewModels:** Custom Hooks (useMissions, useAuth, etc.)
+- **Model:** Services + Types
+- **State:** React Query (server) + Zustand (client)
 
-   $ git clone https://github.com/seu-usuario/orion-dev-demo.git
+### Backend (Clean Architecture)
 
-2. Navegue até o diretório do projeto 📁
+- **Domain:** Entities + Business Rules
+- **Application:** Use Cases + DTOs
+- **Infrastructure:** Data Access + External Services
+- **API:** Controllers + Endpoints
 
-   $ cd orion-dev-demo
+## 👤 Autor
 
-3. Execute com Docker
-
-   $ docker-compose up -d
-
----
-
-**Desenvolvedores**
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/lucasrgt">
-        <img src="https://avatars.githubusercontent.com/u/110699363?v=4" width="100px" alt="Foto do Desenvolvedor"/><br>
-        <sub>
-          <b>Lucas Richard Garcia Tinoco</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
+**Lucas Richard Garcia Tinoco** - [GitHub](https://github.com/lucasrgt)

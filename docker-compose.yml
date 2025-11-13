@@ -1,0 +1,62 @@
+services:
+  # Database
+  db:
+    image: postgres:alpine
+    container_name: oriondev-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: oriondev-dev-db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d oriondev-dev-db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - oriondev-network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: OrionDev.AdminAPI/Dockerfile
+    container_name: oriondev-backend
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=oriondev-dev-db;Username=postgres;Password=postgres
+    ports:
+      - '5100:8080'
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - oriondev-network
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: oriondev-frontend
+    restart: always
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+    networks:
+      - oriondev-network
+
+volumes:
+  postgres-db:
+    driver: local
+
+networks:
+  oriondev-network:
+    driver: bridge

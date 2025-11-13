@@ -4,9 +4,9 @@ using OrionDev.Application.UseCases.Expedition;
 
 namespace OrionDev.AdminAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/expeditions")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+
 public class ExpeditionController(
   CreateExpedition createExpeditionUc,
   DeleteExpedition deleteExpeditionUc,

@@ -3,7 +3,7 @@ using OrionDev.Application.UseCases.Moon;
 
 namespace OrionDev.AdminAPI.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/moons")]
 [ApiController]
 public class MoonController(
   CreateMoon createMoonUc,
@@ -32,6 +32,13 @@ public class MoonController(
   [HttpGet("get-by-id-moon/{id:guid}")]
   public async Task<IActionResult> GetByIdMoon(Guid id) {
     var output = await getByIdMoonUc.Execute(id);
+    return Ok(output);
+  }
+
+  [HttpPut("{id:guid}")]
+  public async Task<IActionResult> UpdateMoon(Guid id, UpdateMoonInput req) {
+    var input = new UpdateMoonInput(id.ToString(), req.Name, req.Lore, req.Appearance);
+    var output = await updateMoonUc.Execute(input);
     return Ok(output);
   }
 }
